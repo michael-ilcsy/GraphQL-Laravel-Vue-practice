@@ -12,6 +12,18 @@
 
 namespace App\Models{
 /**
+ * App\Models\Favorite
+ *
+ * @property-read \App\Models\Account $account
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Favorite newModelQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Favorite newQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Favorite query()
+ */
+	class Favorite extends \Eloquent {}
+}
+
+namespace App\Models{
+/**
  * App\Models\Follow
  *
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Follow newModelQuery()
@@ -37,6 +49,8 @@ namespace App\Models{
 /**
  * App\Models\Timeline
  *
+ * @property-read \App\Models\Favorite $favorite
+ * @property-read \App\Models\Favorite $originalFavorite
  * @property-read \App\Models\Tweet $tweet
  * @method static bool|null forceDelete()
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Timeline newModelQuery()
