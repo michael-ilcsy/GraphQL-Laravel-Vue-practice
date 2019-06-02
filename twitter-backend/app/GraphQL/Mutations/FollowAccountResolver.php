@@ -3,13 +3,12 @@
 namespace App\GraphQL\Mutations;
 
 use App\Models\Account;
-use App\Models\Timeline;
-use App\Models\Tweet;
-use Carbon\Carbon;
+use App\Models\Follow;
+use App\Models\Follower;
 use GraphQL\Type\Definition\ResolveInfo;
 use Nuwave\Lighthouse\Support\Contracts\GraphQLContext;
 
-class CreateTweetResolver
+class FollowAccountResolver
 {
     /**
      * Return a value for the field.
@@ -24,50 +23,34 @@ class CreateTweetResolver
     {
         /** @var \App\Models\Account $account */
         $account = auth()->user();
-        $tweet = $this->createTweet($account, $args);
-        $this->addTweetToTimeline($account, $tweet);
-        $this->addTweetToFollowersTimeline($account, $tweet);
-        return $tweet;
+        $follow = $this->followAccount($account, $args);
+        $this->addToFollowers($account, $args);
+        return $follow;
     }
 
     /**
      * @param \App\Models\Account $account
      * @param array $data
-     * @return \App\Models\Tweet
+     * @return \App\Models\Follow
      */
-    protected function createTweet(Account $account, array $data)
+    protected function followAccount(Account $account, array $data)
     {
-        return Tweet::create([
+        return Follow::create([
             'account_id' => $account->id,
-            'content' => $data['content'],
-            'tweeted_at' => Carbon::now(),
+            'follow_account_id' => $data['id'],
         ]);
     }
 
     /**
      * @param \App\Models\Account $account
-     * @param \App\Models\Tweet $tweet
-     * @return \App\Models\Timeline
+     * @param array $data
+     * @return \App\Models\Follower
      */
-    protected function addTweetToTimeline(Account $account, Tweet $tweet)
+    protected function addToFollowers(Account $account, array $data)
     {
-        return Timeline::create([
-            'account_id' => $account->id,
-            'tweet_id' => $tweet->id,
+        return Follower::create([
+            'account_id' => $data['id'],
+            'follower_account_id' => $account->id,
         ]);
-    }
-
-    /**
-     * @param \App\Models\Account $account
-     * @param \App\Models\Tweet $tweet
-     */
-    protected function addTweetToFollowersTimeline(Account $account, Tweet $tweet)
-    {
-        foreach ($account->followers as $follower) {
-            Timeline::create([
-                'account_id' => $follower->follower_account_id,
-                'tweet_id' => $tweet->id,
-            ]);
-        }
     }
 }
