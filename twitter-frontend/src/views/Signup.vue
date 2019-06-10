@@ -4,29 +4,29 @@
       <v-layout>
         <v-flex xs12 md4>
           <v-text-field
-                  v-model="name"
-                  label="name"
-                  required
+            v-model="name"
+            label="name"
+            required
           ></v-text-field>
           <v-text-field
-                  v-model="twitterId"
-                  label="twitterId"
-                  required
+            v-model="twitterId"
+            label="twitterId"
+            required
           ></v-text-field>
           <v-text-field
-                  v-model="email"
-                  label="E-mail"
-                  required
+            v-model="email"
+            label="E-mail"
+            required
           ></v-text-field>
           <v-text-field
-                  v-model="pass"
-                  label="password"
-                  required
+            v-model="pass"
+            label="password"
+            required
           ></v-text-field>
           <v-text-field
-                  v-model="passConf"
-                  label="password_confirm"
-                  required
+            v-model="passConf"
+            label="password_confirm"
+            required
           ></v-text-field>
           <v-btn color="primary" type="submit">アカウント作成</v-btn>
         </v-flex>

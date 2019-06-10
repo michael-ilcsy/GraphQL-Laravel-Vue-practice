@@ -4,14 +4,14 @@
       <v-layout>
         <v-flex xs12 md4>
           <v-text-field
-                  v-model="email"
-                  label="E-mail"
-                  required
+            v-model="email"
+            label="E-mail"
+            required
           ></v-text-field>
           <v-text-field
-                  v-model="pass"
-                  label="password"
-                  required
+            v-model="pass"
+            label="password"
+            required
           ></v-text-field>
           <v-btn color="primary" type="submit">login</v-btn>
           <router-link to="/signup">

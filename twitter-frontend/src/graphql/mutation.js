@@ -38,3 +38,13 @@ export const LOGIN = gql`
     }
   }
 `
+
+export const CREATE_TWEET = gql`
+  mutation($tweet: String!) {
+    CreateTweet(content: $tweet) {
+      id
+      content
+      tweeted_at
+    }
+  }
+`
